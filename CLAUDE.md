@@ -6,7 +6,7 @@
 
 技術棧：Vue 3 + TypeScript + Vite + Pinia + Vue Router，套件管理使用 pnpm。
 
-> 目前處於 `npm create vue@latest` 樣板初始狀態，尚未實作實際的遊戲功能。`src/router/index.ts` 的 routes 為空，`src/App.vue` 僅顯示樣板文字，`src/stores/counter.ts` 為 Pinia 範例 store。
+MVP 已完成：三種遊戲模式（classic / reverse / mixed）、三段難度（easy / medium / hard，hard 含進階單位數×雙位數）、每題倒數、4 選 1 答題、計分與連擊、紙片翻飛動畫、localStorage 持久化、結算頁。詳見 [docs/FEATURES.md](./docs/FEATURES.md)。
 
 ## 常用指令
 
