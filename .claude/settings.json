@@ -1,0 +1,51 @@
+{
+  "permissions": {
+    "allow": [
+      "Edit(~/.npm/**)",
+      "Read(~/.npm/**)",
+      "Write(~/Library/pnpm/**)",
+      "Edit(~/Library/pnpm/**)",
+      "Read(~/Library/pnpm/**)",
+      "Write(~/.local/share/pnpm/**)",
+      "Edit(~/.local/share/pnpm/**)",
+      "Read(~/.local/share/pnpm/**)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(sudo *)",
+      "Bash(git push *)",
+      "Bash(git reset --hard *)"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "network": {
+      "allowLocalBinding": true,
+      "allowedDomains": [
+        "registry.npmjs.org",
+        "*.npmjs.org",
+        "registry.yarnpkg.com",
+        "pnpm.io",
+        "*.pnpm.io",
+        "*.github.com",
+        "github.com",
+        "*.githubusercontent.com",
+        "localhost:*"
+      ]
+    }
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/format-prettier.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
