@@ -53,12 +53,23 @@ export const useSettingsStore = defineStore('settings', () => {
     },
   })
 
+  const showAnswerHint = computed({
+    get: () => state.value.showAnswerHint,
+    set: (value) => {
+      state.value = { ...state.value, showAnswerHint: value }
+    },
+  })
+
   function toggleSound() {
     soundEnabled.value = !soundEnabled.value
   }
 
   function togglePractice() {
     practiceMode.value = !practiceMode.value
+  }
+
+  function toggleShowAnswerHint() {
+    showAnswerHint.value = !showAnswerHint.value
   }
 
   function setLastMode(mode: GameMode) {
@@ -79,8 +90,10 @@ export const useSettingsStore = defineStore('settings', () => {
     lastDifficulty,
     practiceMode,
     firstTimeHintShown,
+    showAnswerHint,
     toggleSound,
     togglePractice,
+    toggleShowAnswerHint,
     setLastMode,
     setLastDifficulty,
     markFirstTimeHintShown,

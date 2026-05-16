@@ -12,6 +12,7 @@ import CountdownBar from '@/components/CountdownBar.vue'
 import ComboBadge from '@/components/ComboBadge.vue'
 import ScoreDisplay from '@/components/ScoreDisplay.vue'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
+import AnswerHint from '@/components/AnswerHint.vue'
 
 const router = useRouter()
 const session = useGameSessionStore()
@@ -31,7 +32,7 @@ function handleTimeout() {
   advancing.value = true
   session.timeoutCurrent()
   audio.playWrong()
-  scheduleAdvance(900)
+  scheduleAdvance(settings.showAnswerHint ? 1800 : 900)
 }
 
 function scheduleAdvance(delayMs: number) {
@@ -68,7 +69,7 @@ function onSelect(value: number) {
   } else {
     audio.playWrong()
     triggerShake()
-    scheduleAdvance(800)
+    scheduleAdvance(settings.showAnswerHint ? 1800 : 800)
   }
 }
 
@@ -80,6 +81,12 @@ const choiceState = (value: number) => {
 }
 
 const choicesDisabled = computed(() => advancing.value)
+
+const showAnswerHint = computed(
+  () =>
+    settings.showAnswerHint &&
+    (session.lastOutcome === 'wrong' || session.lastOutcome === 'timeout'),
+)
 
 onMounted(() => {
   if (session.status !== 'playing') {
@@ -159,6 +166,14 @@ function requestQuit() {
         <QuestionCard
           v-if="session.currentQuestion"
           :key="session.currentQuestion.id"
+          :question="session.currentQuestion"
+        />
+      </Transition>
+
+      <Transition name="hint-fade">
+        <AnswerHint
+          v-if="showAnswerHint && session.currentQuestion"
+          :key="`hint-${session.currentQuestion.id}`"
           :question="session.currentQuestion"
         />
       </Transition>
@@ -287,6 +302,17 @@ function requestQuit() {
 .paper-flip-leave-to {
   transform: translateX(-40%) rotate(-12deg) scale(0.92);
   opacity: 0;
+}
+
+.hint-fade-leave-active {
+  transition:
+    transform 0.22s ease,
+    opacity 0.2s ease;
+}
+
+.hint-fade-leave-to {
+  opacity: 0;
+  transform: translateY(6px) rotate(-2deg) scale(0.94);
 }
 
 @keyframes page-shake {

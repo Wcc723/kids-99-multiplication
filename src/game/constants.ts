@@ -64,4 +64,5 @@ export const DEFAULT_SETTINGS: Settings = {
   lastDifficulty: 'easy',
   practiceMode: false,
   firstTimeHintShown: false,
+  showAnswerHint: false,
 }

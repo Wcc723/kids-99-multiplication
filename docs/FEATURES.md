@@ -36,26 +36,27 @@
 
 ## 遊戲功能
 
-| 功能                 | 狀態 | 說明                                                                                                 |
-| -------------------- | ---- | ---------------------------------------------------------------------------------------------------- |
-| 首頁 / 主選單        | ✅   | 模式選擇、難度選擇、練習模式開關、音效開關、最高分顯示                                               |
-| 三種遊戲模式         | ✅   | classic（A×B=?）、reverse（A×?=C，隱藏左右隨機）、mixed（兩者各半 shuffle）                          |
-| 題目產生器           | ✅   | 三難度數字池 + Hard 模式 40% 進階單位數×雙位數題（10-29）                                            |
-| 4 選 1 答題介面      | ✅   | 誘餌策略：±1 鄰近、相鄰乘法表、同位數位移、池內補抽                                                  |
-| 每題倒數機制         | ✅   | Easy 8s / Medium 6s / Hard 5s；rAF-based、tab 切換自動暫停                                           |
-| 練習模式（無倒數）   | ✅   | 預設 OFF；首次進入彈出友善提示；本局不記分                                                           |
-| 計分系統             | ✅   | 基礎 100 + 時間獎勵 (timeLeftMs × 0.01) + 連擊加成（最多 +100）+ 進階題 1.5x                         |
-| 連擊 combo 顯示      | ✅   | combo ≥ 2 顯示，≥ 5 變大並加擺動動畫                                                                 |
-| 動態回饋             | ✅   | 答對 pop-and-fade + 星星，答錯 shake + 紅色震動，倒數歸零紙片塌陷                                    |
-| 紙片翻飛過場         | ✅   | Vue `<Transition>` + cubic-bezier，題目切換像翻課本                                                  |
-| 結算頁               | ✅   | 分數、答對/錯/逾時/正確率/最佳連擊；破紀錄顯示「★ 新紀錄 ★」並擺動                                   |
-| 中途離開確認         | ✅   | 紙質風 `ConfirmDialog` + `beforeRouteLeave` 守衛                                                     |
-| 重新開始             | ✅   | 結算頁「再玩一次」（同模式同難度）或「換模式」（回首頁）                                             |
-| Local Storage 持久化 | ✅   | `m99:settings`、`m99:highScores`（envelope + version migration）                                     |
-| 隱私模式容錯         | ✅   | `safeSetItem`/`safeGetItem` 用 try/catch，失敗 `console.warn` 不中斷                                 |
-| 音效 hook            | 🚧   | `useAudio` + `settings.soundEnabled` 結構就緒；音檔目前為 placeholder，需手動補 `public/audio/*.mp3` |
-| 多人模式或排行榜     | —    | 不在 MVP 範圍內                                                                                      |
-| 答題回顧 / 錯題重練  | —    | 未來版本可加                                                                                         |
+| 功能                 | 狀態 | 說明                                                                                                                                             |
+| -------------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 首頁 / 主選單        | ✅   | 模式選擇、難度選擇、練習模式開關、音效開關、最高分顯示                                                                                           |
+| 三種遊戲模式         | ✅   | classic（A×B=?）、reverse（A×?=C，隱藏左右隨機）、mixed（兩者各半 shuffle）                                                                      |
+| 題目產生器           | ✅   | 三難度數字池 + Hard 模式 40% 進階單位數×雙位數題（10-29）                                                                                        |
+| 4 選 1 答題介面      | ✅   | 誘餌策略：±1 鄰近、相鄰乘法表、同位數位移、池內補抽                                                                                              |
+| 每題倒數機制         | ✅   | Easy 8s / Medium 6s / Hard 5s；rAF-based、tab 切換自動暫停                                                                                       |
+| 練習模式（無倒數）   | ✅   | 預設 OFF；首次進入彈出友善提示；本局不記分                                                                                                       |
+| 計分系統             | ✅   | 基礎 100 + 時間獎勵 (timeLeftMs × 0.01) + 連擊加成（最多 +100）+ 進階題 1.5x                                                                     |
+| 連擊 combo 顯示      | ✅   | combo ≥ 2 顯示，≥ 5 變大並加擺動動畫                                                                                                             |
+| 動態回饋             | ✅   | 答對 pop-and-fade + 星星，答錯 shake + 紅色震動，倒數歸零紙片塌陷                                                                                |
+| 答錯正確答案提示     | ✅   | 首頁勾選「答錯顯示正解」後啟用（預設關閉）；答錯／超時時於題目卡下方彈出「💡 正確答案：A × B = C」紙片，停留 1.8 秒；未開啟時維持原有 0.8 秒節奏 |
+| 紙片翻飛過場         | ✅   | Vue `<Transition>` + cubic-bezier，題目切換像翻課本                                                                                              |
+| 結算頁               | ✅   | 分數、答對/錯/逾時/正確率/最佳連擊；破紀錄顯示「★ 新紀錄 ★」並擺動                                                                               |
+| 中途離開確認         | ✅   | 紙質風 `ConfirmDialog` + `beforeRouteLeave` 守衛                                                                                                 |
+| 重新開始             | ✅   | 結算頁「再玩一次」（同模式同難度）或「換模式」（回首頁）                                                                                         |
+| Local Storage 持久化 | ✅   | `m99:settings`、`m99:highScores`（envelope + version migration）                                                                                 |
+| 隱私模式容錯         | ✅   | `safeSetItem`/`safeGetItem` 用 try/catch，失敗 `console.warn` 不中斷                                                                             |
+| 音效 hook            | 🚧   | `useAudio` + `settings.soundEnabled` 結構就緒；音檔目前為 placeholder，需手動補 `public/audio/*.mp3`                                             |
+| 多人模式或排行榜     | —    | 不在 MVP 範圍內                                                                                                                                  |
+| 答題回顧 / 錯題重練  | —    | 未來版本可加                                                                                                                                     |
 
 > 開始實作任一新功能前，請先於 `docs/plans/` 建立計畫文件（命名 `YYYY-MM-DD-<feature>.md`），參考 [DEVELOPMENT.md](./DEVELOPMENT.md#計畫歸檔流程)。
 
@@ -101,7 +102,8 @@ score += round(
   "lastMode": "classic",
   "lastDifficulty": "easy",
   "practiceMode": false,
-  "firstTimeHintShown": false
+  "firstTimeHintShown": false,
+  "showAnswerHint": false
 }}
 
 // m99:highScores

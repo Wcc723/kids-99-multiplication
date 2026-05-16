@@ -40,6 +40,7 @@ export interface Settings {
   lastDifficulty: Difficulty
   practiceMode: boolean
   firstTimeHintShown: boolean
+  showAnswerHint: boolean
 }
 
 export type HighScoreKey = `${GameMode}:${Difficulty}`

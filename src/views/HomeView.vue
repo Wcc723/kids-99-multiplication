@@ -49,6 +49,10 @@ function toggleSound() {
   settings.toggleSound()
 }
 
+function toggleShowAnswerHint() {
+  settings.toggleShowAnswerHint()
+}
+
 function dismissHint(enablePractice: boolean) {
   if (enablePractice) {
     settings.practiceMode = true
@@ -114,6 +118,12 @@ function dismissHint(enablePractice: boolean) {
         <input type="checkbox" :checked="settings.soundEnabled" @change="toggleSound" />
         <span class="box" aria-hidden="true">{{ settings.soundEnabled ? '✓' : '' }}</span>
         音效
+      </label>
+      <label class="toggle">
+        <input type="checkbox" :checked="settings.showAnswerHint" @change="toggleShowAnswerHint" />
+        <span class="box" aria-hidden="true">{{ settings.showAnswerHint ? '✓' : '' }}</span>
+        答錯顯示正解
+        <span class="hint-text">（答錯時提示正確算式）</span>
       </label>
     </section>
 
